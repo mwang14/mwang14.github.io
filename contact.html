@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Michael Wang</title>
+    <title>Contact - Business Casual - Start Bootstrap Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +32,8 @@
 
 <body>
 
-    <div class="brand">Michael Wang</div>
-    <div class="address-bar">wang.mich@husky.neu.edu | 978-944-3686</div>
+    <div class="brand">Business Casual</div>
+    <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
 
     <!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation">
@@ -56,10 +56,13 @@
                         <a href="index.html">Home</a>
                     </li>
                     <li>
-                        <a href="experience.html">Experience</a>
+                        <a href="about.html">About</a>
                     </li>
                     <li>
                         <a href="blog.html">Blog</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -68,21 +71,34 @@
         <!-- /.container -->
     </nav>
 
-
+    <div class="container">
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center"><strong>About Me</strong>
+                    <h2 class="intro-text text-center">Contact
+                        <strong>business casual</strong>
                     </h2>
                     <hr>
-                    <img class="img-responsive img-border img-left" src="img/intro-pic.jpg" alt="">
-                    <hr class="visible-xs">
-                    <p>Hi! I'm third year student at Northeastern University. I am a computer science major with a concentration in cyber operations and a minor in mathematics. I first started coding in my freshman year of college and since then, I have taken on a passion for cyber security.</p>
-                    <p>I have just finished my first co-op at Poweradvocate(January 2016 to June 2016) where I wrote web applications using Java, Javascript,
-                    and SQL. I plan on taking the next month or two to learn as much as I can, and I will start looking for another co-op at the end of August.</p>
                 </div>
+                <div class="col-md-8">
+                    <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
+                    <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+                </div>
+                <div class="col-md-4">
+                    <p>Phone:
+                        <strong>123.456.7890</strong>
+                    </p>
+                    <p>Email:
+                        <strong><a href="mailto:name@example.com">name@example.com</a></strong>
+                    </p>
+                    <p>Address:
+                        <strong>3481 Melrose Place
+                            <br>Beverly Hills, CA 90210</strong>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
 
@@ -90,13 +106,36 @@
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center"><strong>Current plans/activities</strong>
+                    <h2 class="intro-text text-center">Contact
+                        <strong>form</strong>
                     </h2>
                     <hr>
-                    <p>So far, much of my experience has come from software development. I am currently looking to learn more about security and computer systems.
-                    Right now, I am reading <a href="https://www.amazon.com/Web-Application-Hackers-Handbook-Exploiting/dp/1118026470/ref=sr_1_1?ie=UTF8&qid=1467690978&sr=8-1&keywords=the+web+application+hacker%27s+handbook">The Web Application Hacker's Handbook</a>, and memorizing the notes I took in preparation for the <a href="http://www.cisco.com/c/en/us/training-events/training-certifications/certifications/entry/ccent.html">CCENT</a>. When I have finished that, I plan on reading <a href="https://www.amazon.com/Hacking-Art-Exploitation-Jon-Erickson/dp/1593271441/ref=sr_1_1?ie=UTF8&qid=1467691094&sr=8-1&keywords=hacking+the+art+of+exploitation"> Hacking: The Art of Exploitation</a>. In addition to my reading, I plan on solidifying my knowledge of C, C++, and Bash. I will also be hacking away at machines on <a href="http://www.vulnhub.com">vulnhub</a>.  </p>
-                    <p>You can see more about what I've been up to at my <a href="blog.html">blog</a>.</p>
-                    <p>Last updated 7/4/16.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, vitae, distinctio, possimus repudiandae cupiditate ipsum excepturi dicta neque eaque voluptates tempora veniam esse earum sapiente optio deleniti consequuntur eos voluptatem.</p>
+                    <form role="form">
+                        <div class="row">
+                            <div class="form-group col-lg-4">
+                                <label>Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group col-lg-12">
+                                <label>Message</label>
+                                <textarea class="form-control" rows="6"></textarea>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <input type="hidden" name="save" value="contact">
+                                <button type="submit" class="btn btn-default">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -108,7 +147,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; Michael Wang 2016</p>
+                    <p>Copyright &copy; Your Website 2014</p>
                 </div>
             </div>
         </div>
@@ -119,13 +158,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <!-- Script to Activate the Carousel -->
-    <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-    </script>
 
 </body>
 
