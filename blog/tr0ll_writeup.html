@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Michael Wang - Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="brand">Michael Wang</div>
+        <div class="address-bar">wang.mich@husky.neu.edu | 978-944-3686</div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="/experience.html">Experience</a>
+                        </li>
+                        <li>
+                            <a href="/blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="/projects.html">Projects</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <div class="container">
+
+            <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>blog</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h2>First vulnhub VM(Tr0ll) writeup
+                        <br>
+                        <small>July 8, 2016</small>
+                    </h2>
+                    <div class = "paragraph">
+                    <p>The hardest part of compromising this machine was by far the setup. I first tried the kioptrix machine, but wasn't able to configure the network configuration properly. However, after two days of finding a suitable machine and setting up Kali, a day and a half of tinkering with the machine, I've finished my first vulnhub VM.</p>
+                    <div class = "paragraph">
+                        <p> So after booting up the VM, I went to the IP in my local browser. I didn't know what I expected, given the name of the VM...</p>
+                        <img src="/img/tr0ll1/initial_web_page.png" height = "300" width = "500">
+                        <p> The "secret" page didn't help much either.</p>
+                        <img src="/img/tr0ll1/web_page_secret.png" height = "300" width = "500">
+                        <p> The next step I took was nmap'ing the IP to see what services they were running. They were running 3(ftp, ssh, and http). I've had the most experience with FTP, so I tried that one first. It was running VSFTPD, so no known vulnerabilities there. However, they allowed anonymous access! </p>
+                        <img src="/img/tr0ll1/initial_nmap_scan.png" height = "300" width = "600">
+                        <p>I found one file(lol.pcap), and downloaded it.</p>
+                        <img src="/img/tr0ll1/lolpcap_file.png" height = "400">
+                        <p>The file was quite a...troll. However, it did give a hint "you almost found the sup3rs3cr3tdirlol". Turns out that that was another directory on the website.</p>
+                        <img src="/img/tr0ll1/supersecretdirectory.png" height = "300" width = "500">
+                        <p> I downloaded the file(roflmao) and examined it. It had one more hint: "check the address 0x0856BF to proceed."</p>
+                        <img src = "/img/tr0ll1/roflmao_contents.png" height = "400" width = "500">
+                        <p>My first thought here was that it was some hardware address that I would have to exploit using some sort of remote buffer overflow. (Un)luckily, I still don't know how to do that, so I tried some other options. I looked the address up on Google Maps, and found it was a street named "Recreation" in Singapore, and thought it could be the password to the root account. It wasn't. I then tried to put the address into the URL again, and it revealed yet another directory.</p>
+                        <img src="/img/tr0ll1/0x0856bf.png" width = "500" height = "400">
+                        <p> I downloaded the files contained in the folders(good_luck contained a text file with usernames, and this_folder_contains_the_password had a text file called "Pass.txt" that said "good job :)"), and fired up Hydra. Unfortunately, it seemed the machine had fail2ban, so every time Hydra failed I had to restart the machine, which was inconvenient. It seemed that the password file was wrong. After playing around, I decided to try "Pass.txt" as the password. I'd like to say that I figured that out by the name of the parent directory("this_folder_contains_the_password"), but honestly... I just guessed :P. I now had a shell inside the machine, albeit without root privileges.</p>
+                        <img src="/img/tr0ll1/hydra.png">
+                        <p>After having a shell, I used the find command("find / -writable -executable" was the exact command) to search for any interesting files I could modify. I found one file that stuck out in particular: /lib/log/cleaner.py.</p>
+                        <img src = "/img/tr0ll1/find.png" height = "600" width = "500">
+                        <p> After examining the file, I realized it was owned by root, and I could write to it!</p>
+                        <img src = "/img/tr0ll1/ls_python.png">
+                        <p> I modified the file so that I would get root access by running another file in tmp.</p>
+                        <img src="/img/tr0ll1/tmp_sh.png">
+                        <p> Finally, I went into the root directory, and found the flag!</p>
+                        <img src="/img/tr0ll1/finished.png">
+
+
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p>Copyright &copy; Michael Wang 2016</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+    </body>
+
+    </html>
