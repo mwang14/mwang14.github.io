@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Michael Wang - Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="brand">Michael Wang</div>
+        <div class="address-bar">wang.mich@husky.neu.edu | 978-944-3686</div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="/experience.html">Experience</a>
+                        </li>
+                        <li>
+                            <a href="/blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="/projects.html">Projects</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <div class="container">
+
+            <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>blog</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h2>vulnhub VM(vulnOS) writeup
+                        <br>
+                        <small>September 21, 2016</small>
+                    </h2>
+                    <div class = "paragraph">
+                    <p>I've had some down time since the start of school, so I decided to try out another VM. This was the first time I actually had to use <a href="https://www.exploit-db.com/">exploit-db</a>. Read on to find out about a vulnerability in OpenDocMan and a Linux privilege escalation exploit.</p>
+                    <div class = "paragraph">
+                        <p> So after booting up the VM, I first started out by nmap'ing the box. There are three ports open: 22, 80, and 6667. I first tried going to the IP in my browser.</p>
+                        <img src="/img/vulnos/website.PNG" height = "400" width = "600">
+                        <p> After poking around(the about page was really helpful), I found some hidden content in the documentation page. This gave me access to a new page and username info!</p>
+                        <img src="/img/vulnos/hidden_guest.PNG" height = "150" width = "900">
+                        <p> I went to the new page it gave me, which was MyDocMan 1.2.7.  </p>
+                        <img src="/img/vulnos/jabd0cs.PNG" height = "250" width = "600">
+                        <p>I logged in as guest, and navigated to the document upload page. Hopefully, they won't sanitize the upload, and I'll be able to upload a PHP shell!</p>
+                        <img src="/img/vulnos/upload_doc_guest.PNG" height = "400" width = "600">
+                        <p>I tried to upload a PHP shell, but it was denied :'(. </p>
+                        <img src = "/img/vulnos/cant_upload_php.PNG" height = "250" width = "600">
+                        <p>After moping and poking around some more, I decided to search on <a href="https://www.exploit-db">exploit-db</a>, and found that there was a SQL injection vulnerability in MyDocMan 1.2.7. You can check that vulnerability out <a href="https://www.exploit-db.com/exploits/32075/">here</a>. I fired up SQLMap, and it worked!</p>
+                        <img src = "/img/vulnos/available_databases.PNG" height = "250" width = "600">
+                        <p>After poking around the databases, I found a new user: webmin.</p>
+                        <img src="/img/vulnos/sqlmap_results.PNG" width = "850" height = "125">
+                        <p> The md5 hash for the password was "webmin1980"</p>
+                        <img src="/img/vulnos/md5hash.PNG" width = "600" height = "250">
+                        <p> I logged in as webmin, and was able to change the file settings to allow myself to upload PHP files.</p>
+                        <img src="/img/vulnos/admin_file_settings.PNG" width = "600" height = "250">
+                        <p> I then uploaded a PHP file!</p>
+                        <img src="/img/vulnos/shell_uploaded.PNG" width = "600" height = "250">
+                        <p> Unfortunately, I couldn't find a way to run it...</p>
+                        <img src="/img/vulnos/cant_get_shell.PNG" width = "600" height = "275">
+                        <p> I found an uploads section of the website, and found a bunch of .dat files. Apparently I wasn't going to be able to get a shell through file inclusion(or maybe it's possible, but beyond my current scope of knowledge). I haven't touched SSH yet though. I ssh'd into the machine with the webmin credentials next.</p>
+                        <img src="/img/vulnos/ssh_access.PNG" width = "600" height = "275">
+                        <p> I found a root directory, but wasn't able to access it. My guess was that the flag was in that directory</p>
+                        <img src="/img/vulnos/cant_root.PNG" width = "750" height = "150">
+                        <p> If you look up the version of Linux on exploit-db(Linux Kernel 3.13.0 < 3.19), there is a local privilege escalation exploit with C. You can check that out <a href="https://www.exploit-db.com/exploits/37292/">here</a>. </p>
+                        <img src="/img/vulnos/linux_version.PNG" width = "750" height = "150">
+                        <p>Because it's a C exploit, I checked if GCC was installed.</a>. </p>
+                        <img src="/img/vulnos/gcc.PNG" width = "250" height = "200">
+                        <p>I copied the exploit into the /tmp directory, and compiled it.</a>. </p>
+                        <img src="/img/vulnos/exploit.PNG" width = "250" height = "200">
+                        <p> I ran the exploit, and now had root access!</p>
+                        <img src="/img/vulnos/root.PNG" width = "600" height = "250">
+                        <p> Finally, I was able to go to the root directory and read the flag.</p>
+                        <img src="/img/vulnos/flag.PNG" width = "600" height = "250">
+                        <br>
+                        <br>
+                        <p>This VM took quite a while, even though I didn't have to write any real exploitations D:. I am planning on getting my <a href="https://www.offensive-security.com/information-security-certifications/oscp-offensive-security-certified-professional/">OSCP</a> next summer, so hopefully this is all good practice!</p>
+
+
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p>Copyright &copy; Michael Wang 2016</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+    </body>
+
+    </html>
