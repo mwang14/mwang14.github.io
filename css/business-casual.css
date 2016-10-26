@@ -108,6 +108,19 @@ hr {
     text-align: center;
 }
 
+.code {
+    margin: 30px auto;
+    background-color: #f4f6f9;
+    width:800px;
+    padding-left: 20px;
+    border: 1px solid #cecece;
+    text-align: left;
+}
+
+.variable {
+    color: #0099ff;
+}
+
 footer {
     background: #fff;
     background: rgba(255,255,255,0.9);
