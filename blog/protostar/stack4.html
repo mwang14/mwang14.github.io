@@ -85,16 +85,33 @@
                 <div class="col-lg-12 text-center">
                     <h2>Exploit Exercises(protostar) writeup
                         <br>
-                        <small>October 26, 2016</small>
-                    </h2>
-                    <div class = "paragraph">
-                    <p>I decided I wanted some practice exploiting C code and buffer overflows. I found a great VM which has quite a few levels.
-                    I'd definitely recommend it, you can check it out <a href="https://exploit-exercises.com/protostar">here</a>.</p>
-                        <h3><b><u><a href="protostar/stack1.html">Level 1(Stack0)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack2.html">Level 2(Stack1)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack3.html">Level 3(Stack2)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack4.html">Level 4(Stack3)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack5.html">Level 5(Stack4)</a></u></b></h3>
+                        <small>December 22, 2016</small>
+                    </h2><div class = "paragraph">
+                        <h3><b><u>Level 4(Stack3)</u></b></h3>
+                        <div class="code">
+                        <p>
+                        void win() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;printf("code flow successfully changed\n")<br>
+                        }<br>
+                        int main(int argc, char **argv)
+                        {<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;volatile int (*fp)();<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;char buffer[64];<br>  
+                          &nbsp;&nbsp;&nbsp;&nbsp;fp = 0;<br> 
+                          &nbsp;&nbsp;&nbsp;&nbsp;gets(buffer);<br> 
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(fp) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("calling function pointer, jumping to 0x%08x\n");<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fp();<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        </p>
+                        </div>
+                    <p> Here, we need to overwrite the variable <i>fp</i> with the address of <i>win()</i>. We can debug the program with GDB to find the address. The exact command is <i>"p &win"</i>. Then, once we have found the address, we simply fill up the buffer with A's, and overwrite <i>fp</i> with the address we have. Check it out <a href="https://github.com/mwang14/CTF_challenges/tree/master/protostar/stack3">here.</a>
+                        </p>
+                        <br>
+                    <p>Click <a href= "../protostar_writeup.html">here</a> to go back to the protostar writeup.</p>
+                    </div>
             </div>
             </div>
 
