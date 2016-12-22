@@ -86,13 +86,35 @@
                     <h2>Exploit Exercises(protostar) writeup
                         <br>
                         <small>October 26, 2016</small>
-                    </h2>
-                    <div class = "paragraph">
-                    <p>I decided I wanted some practice exploiting C code and buffer overflows. I found a great VM which has quite a few levels.
-                    I'd definitely recommend it, you can check it out <a href="https://exploit-exercises.com/protostar">here</a>.</p>
-                        <h3><b><u><a href="protostar/stack1.html">Level 1(Stack0)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack2.html">Level 2(Stack1)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack3.html">Level 3(Stack2)</a></u></b></h3>
+                    </h2><div class = "paragraph">
+                        <h3><b><u>Level 3(Stack2)/u></b></h3>
+                        <div class="code">
+                        <p>
+                        int main(int argc, char **argv)<br>
+                        {<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;volatile int modified;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;char buffer[64];<br>  
+                          &nbsp;&nbsp;&nbsp;&nbsp;char *variable;<br> 
+                          &nbsp;&nbsp;&nbsp;&nbsp;variable = getenv("GREENIE");<br> 
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(variable == NULL) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errx(1, "please set the GREENIE environment variable\n");<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;modified = 0;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;strcpy(buffer, argv[1]);<br>
+                          <br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(modified == 0x0d0a0d0a) {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("you have correctly got the variable to the right value\n");;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Try again, you got 0x%08x\n", modified);<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        </p>
+                        </div>
+                    <p> Here, we need to change the environment variable "GREENIE". We can overflow this very similarly to stack1; you can check out the exploit <a href="https://github.com/mwang14/CTF_challenges/tree/master/protostar/stack2">here.</a>
+                        </p>
+                        <br>
+                    <p>Click <a href= "../protostar_writeup.html">here</a> to go back to the protostar writeup.</p>
+                    </div>
             </div>
             </div>
 

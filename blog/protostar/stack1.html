@@ -90,9 +90,32 @@
                     <div class = "paragraph">
                     <p>I decided I wanted some practice exploiting C code and buffer overflows. I found a great VM which has quite a few levels.
                     I'd definitely recommend it, you can check it out <a href="https://exploit-exercises.com/protostar">here</a>.</p>
-                        <h3><b><u><a href="protostar/stack1.html">Level 1(Stack0)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack2.html">Level 2(Stack1)</a></u></b></h3>
-                        <h3><b><u><a href="protostar/stack3.html">Level 3(Stack2)</a></u></b></h3>
+                    <div class = "paragraph">
+                        <h3><b><u>Level 1(Stack0)</u></b></h3>
+                        <div class="code">
+                        <p>
+                        int main(int argc, char **argv)<br>
+                        {<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;volatile int modified;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;char buffer[64];<br>  
+                          &nbsp;&nbsp;&nbsp;&nbsp;modified = 0;<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;gets(buffer);<br>
+                          <br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;if(modified != 0) {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("you have changed the 'modified' variable\n");<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("Try again?\n");<br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        </p>
+                        </div>
+                    <p> Here we can simply overwite the modified variable by inputting too many characters. The exact command I used was <i>python -c "print 'A'*65" | ./stack0</i></p>
+                    <br>
+                    <p>Click <a href= "../protostar_writeup.html">here</a> to go back to the protostar writeup.</p>
+                    </div>
+
+                    <hr>
+                </div>
             </div>
             </div>
 
