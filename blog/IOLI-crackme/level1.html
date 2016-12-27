@@ -92,23 +92,18 @@
                     </h2>
                     <div class = "paragraph">
                     <div class = "paragraph">
-                        <h3><b><u>Level 0</u></b></h3>
+                        <h3><b><u>Level 1</u></b></h3>
                         
-                    <p> You can view the binary <a href="https://github.com/mwang14/CTF_challenges/tree/master/IOLI-crackme/level0">here</a>. <br>To find the password, all we need to do is examine the file(crackme0x00-original) with the <i>strings</i> command, we can see that it contains the string "250382". By entering this string, we have found the correct password.<br>
-                    Next, we need to patch it so that the file accepts any password. By disassembling it with radare2, (after opening the file, the commands are "aa" and "pdf @ main" to see the main method), we can see how it checks the password.</p> 
-
+                    <p> You can view the binary <a href="https://github.com/mwang14/CTF_challenges/tree/master/IOLI-crackme/level1">here</a>. <br>Here, we need to do a little more debugging to find the password. By disassembling the binary, we can see that it contains the following lines in the main method.<br></p>
                     <div class="code">
-                        <p>
-                        |           0x0804845e      c74424048f85.  mov dword [esp + local_4h], str.250382<br>
-                        |           0x08048466      890424         mov dword [esp], eax<br>
-                        |           0x08048469      e8e2feffff     call sym.imp.strcmp        ; int strcmp(const char *s1, const char *s2);<br>
-                        |           0x0804846e      85c0           test eax, eax<br>
-                        |       ,=< 0x08048470      740e           je 0x8048480<br>
-
-                        </p>
+                    <p>
+                    |           0x0804841f      c704244c8504.  mov dword [esp], 0x804854c  ; [0x804854c:4]=0x49006425 ; "%d"<br>
+                    |           0x08048426      e8e1feffff     call sym.imp.scanf         ; int scanf(const char *format);<br>
+                    |           0x0804842b      817dfc9a1400.  cmp dword [ebp - local_4h], 0x149a ; [0x149a:4]=0x2ec0804<br>
+                    |       ,=< 0x08048432      740e           je 0x8048442<br>
+                    </p>
                     </div>
-                    <p> Now, all we need to do is patch it. We can see that it simply compares the input with the hardcoded string "250382". If we can replace the <i>je</i> with a <i>jmp</i>, it should jump to the accepted portion every single time regardless of whether the string is equal to "250382"! <br>
-                    After opening the file in radare2, we can jump to the address of interest(0x08048470) using the command, "s 0x08048470". You should see that the address has now changed. We can see the next 15 bytes using the pD command. Once here, we can write the bytes "eb" using the command "wx eb"(write bytes) to change the <i>je</i> to <i>jmp</i>. </p>
+                    <p>We can patch it in much the same way as level0. Simply jump to the address <i>0x08048432</i> and replace the <i>je</i> with a <i>jmp</i>. </p>
                     <br>
                     <p>Click <a href= "../IOLI-crackme.html">here</a> to go back to the main writeup.</p>
                     </div>
