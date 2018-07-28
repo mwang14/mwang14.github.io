@@ -194,7 +194,7 @@ Success! We've now exploited an executable using ROP. Go get yourself some ice c
 
 Hopefully after this post, ROP makes a little bit more sense to you now. Almost everything these days is compiled with DEP and ASLR - we've learned a solid technique for bypassing DEP here - stay tuned for how to bypass ASLR. Thanks for reading!
 
-#Sources
+# Sources
 
 + Xpnsec. “ROP Primer - Walkthrough of Level 0.” XPN Security, 27 Jan. 2017, xpnsec.tumblr.com/post/156417043491/rop-primer-walkthrough-of-level-0.
 + “Windows Exploit Development - Part 2: Intro to Stack Based Overflows.” Security Sift, 27 July 2015, www.securitysift.com/windows-exploit-development-part-2-intro-stack-overflow/.
