@@ -1,0 +1,30 @@
+---
+layout: layout
+---
+{% if page.category == 'Most Recent' %}
+	<div class='container'>
+		{% for post in site.posts %}
+			<div class="row">
+			<div class="col-sm-8 col-md-8 col-lg-8">
+				<h4 style="text-align: left">
+					<a href="{{ site.baseurl }}{{ post.url }}"><strong>{{ post.title }}</strong></a>
+				</h4>
+				<p style='font-size: 12px; text-align: left'>Posted {{ post.date | date: "%B %e, %Y" }}</p>
+			</div>
+			</div>
+		{% endfor %}
+	</div>
+{% else %}
+	<div class='container'>
+		{% for post in site.categories[page.category] %}
+			<div class="row">
+			<div class="col-sm-8 col-md-8 col-lg-8">
+				<h4 style="text-align: left">
+					<a href="{{ site.baseurl }}{{ post.url }}"><strong>{{ post.title }}</strong></a>
+				</h4>
+				<p style='font-size: 12px; text-align: left'>Posted {{ post.date | date: "%B %e, %Y" }}</p>
+			</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}
