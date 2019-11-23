@@ -1,13 +1,18 @@
 ---
-layout: home
+layout: default
 ---
 
-<section id="about">
-	<div class="container">
-	  <div class="avatar">
-	  </div>
-	  <br>
-	  <p> My name is <strong>{{ site.author }}</strong>. I grew up in Boston, and am currently studying Computer Science at Northeastern University, and working at MIT Lincoln Laboratory as a Security Researcher.</p>
-	  <p> My current focus is to improve my understanding of Cyber Security. </p>
-	</div>
-</section>
+<div class="posts">
+  {% for post in site.posts %}
+    <article class="post">
+
+      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+
+      <div class="entry">
+        {{ post.excerpt }}
+      </div>
+
+      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+    </article>
+  {% endfor %}
+</div>
