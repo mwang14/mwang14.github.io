@@ -32,6 +32,6 @@ News
 Publications
 =====
 - [RaceInjector: Injecting Races to Evaluate and Learn Dynamic Race Detection Algorithms](https://dl.acm.org/doi/abs/10.1145/3589250.3596142) __Michael Wang__, Shashank Srikant, Malavika Samak, Una-May O'Reilly. __SOAP 2023__.
-- [NeuDep: Neural Binary Memory Dependence Analysis](https://arxiv.org/abs/2210.02853) Kexin Pei, Dongdong She, Michael Wang, Scott Geng, Zhou Xuan, Yaniv David, Junfeng Yang, Suman Jana, Baishakhi Ray. __ESEC/FSE 2022__.
-- [COBRA-GCN: Contrastive Learning to Optimize Binary Representation Analysis with Graph Convolutional Networks](https://dl.acm.org/doi/abs/10.1007/978-3-031-09484-2_4) Michael Wang, Alexander Interrante-Grant, Ryan Whelan, Tim Leek. __DIMVA 2022__.
+- [NeuDep: Neural Binary Memory Dependence Analysis](https://arxiv.org/abs/2210.02853) Kexin Pei, Dongdong She, __Michael Wang__, Scott Geng, Zhou Xuan, Yaniv David, Junfeng Yang, Suman Jana, Baishakhi Ray. __ESEC/FSE 2022__.
+- [COBRA-GCN: Contrastive Learning to Optimize Binary Representation Analysis with Graph Convolutional Networks](https://dl.acm.org/doi/abs/10.1007/978-3-031-09484-2_4) __Michael Wang__, Alexander Interrante-Grant, Ryan Whelan, Tim Leek. __DIMVA 2022__.
 
