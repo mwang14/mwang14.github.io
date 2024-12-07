@@ -9,11 +9,7 @@ redirect_from:
 ---
 
 
-Hi! I'm Michael, a second year Computer Science PhD student at MIT advised by [Armando Solar-Lezama](https://people.csail.mit.edu/asolar/) and supported by an NSF fellowship. My research currently focuses on improving machine learning model's ability to reason about and generate programs. Previously, I was a security researcher at MIT Lincoln Laboratory. I graduated with my undergraduate from Northeastern University in 2018.
-
-Aside from research, I spend most of my free time playing music or cooking (cooking much more these days). I take voice lessons with [Kristin Lawler](https://www.kristinlawler.com/). I also intern/apprentice (apprentice sounds cooler I think) under the amazing chef [Lisa Caldwell](http://www.lisaecaldwell.com/). 
-
-
+Hi! I'm Michael, a fourth year Computer Science PhD student at MIT advised by [Armando Solar-Lezama](https://people.csail.mit.edu/asolar/) and supported by an NSF fellowship. I'm currently working on program analysis for dynamic languages.. Previously, I was a security researcher at MIT Lincoln Laboratory. I graduated with my undergraduate from Northeastern University in 2018.
 
 News
 =====
