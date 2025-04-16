@@ -9,10 +9,11 @@ redirect_from:
 ---
 
 
-Hi! I'm Michael, a fourth year Computer Science PhD student at MIT advised by [Armando Solar-Lezama](https://people.csail.mit.edu/asolar/) and supported by an NSF fellowship. I'm currently working on program analysis for dynamic languages.. Previously, I was a security researcher at MIT Lincoln Laboratory. I graduated with my undergraduate from Northeastern University in 2018.
+Hi! I'm Michael, a fourth year Computer Science PhD student at MIT advised by [Armando Solar-Lezama](https://people.csail.mit.edu/asolar/) and supported by an NSF fellowship. I'm currently working on program analysis for dynamic languages, specifically Javascript. I'm interested finding different ways to augment traditional program analysis with language models. Previously, I was a security researcher at MIT Lincoln Laboratory. I graduated with my undergraduate from Northeastern University in 2018.
 
 News
 =====
+- _2025_03_: [ABSINT-AI](https://openreview.net/pdf?id=3RP6YmKo59) accepted to VerifAI 2025 at ICLR.
 - _2023.05_: Switched to the [Computer-Aided Programming](http://groups.csail.mit.edu/cap/) group advised by [Armando Solar-Lezama](https://people.csail.mit.edu/asolar/).
 - _2023.05_: Finished my TA requirement by TA'ing [6.5660](https://css.csail.mit.edu/6.858/2023/).
 - _2023.04_: [RaceInjector](https://dl.acm.org/doi/abs/10.1145/3589250.3596142) is accepted at [SOAP](https://pldi23.sigplan.org/home/SOAP-2023) 2023.
@@ -27,6 +28,8 @@ News
 
 Publications
 =====
+- [ABSINT-AI: Language Models for Abstract Interpretation](https://openreview.net/pdf?id=3RP6YmKo59) __Michael Wang__, Kexin Pei, Armando Solar-Lezama. __VerifAI 2025__.
+- CALLME: Call Graph Augmentation with Large Language Models for Javascript. __Michael Wang__, Kexin Pei, Armando Solar-Lezama. *In Submission*.
 - [RaceInjector: Injecting Races to Evaluate and Learn Dynamic Race Detection Algorithms](https://dl.acm.org/doi/abs/10.1145/3589250.3596142) __Michael Wang__, Shashank Srikant, Malavika Samak, Una-May O'Reilly. __SOAP 2023__.
 - [NeuDep: Neural Binary Memory Dependence Analysis](https://arxiv.org/abs/2210.02853) Kexin Pei, Dongdong She, __Michael Wang__, Scott Geng, Zhou Xuan, Yaniv David, Junfeng Yang, Suman Jana, Baishakhi Ray. __ESEC/FSE 2022__.
 - [COBRA-GCN: Contrastive Learning to Optimize Binary Representation Analysis with Graph Convolutional Networks](https://dl.acm.org/doi/abs/10.1007/978-3-031-09484-2_4) __Michael Wang__, Alexander Interrante-Grant, Ryan Whelan, Tim Leek. __DIMVA 2022__.
